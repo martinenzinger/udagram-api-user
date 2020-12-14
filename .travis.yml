@@ -15,7 +15,7 @@ before_script:
 
 script:
   - docker --version # print the version for logging
-  - docker build -t udagram-api-user --build-arg POSTGRES_USERNAME=${POSTGRES_USERNAME} --build-arg POSTGRES_PASSWORD=${POSTGRES_PASSWORD} --build-arg POSTGRES_DB=${POSTGRES_DB} --build-arg POSTGRES_HOST=${POSTGRES_HOST} --build-arg URL=${URL} --build-arg JWT_SECRET=${JWT_SECRET} .
+  - docker build -t udagram-api-user .
   - docker tag udagram-api-user martinenzinger/udagram-api-user:latest
 
 after_success:
