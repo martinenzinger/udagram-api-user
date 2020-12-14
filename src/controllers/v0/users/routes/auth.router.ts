@@ -49,10 +49,15 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
 router.get('/verification',
     requireAuth,
     async (req: Request, res: Response) => {
+      let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+      console.log(new Date().toLocaleString() + `: ${ip} GET /users/auth/verification - Get authentication status`);
       return res.status(200).send({auth: true, message: 'Authenticated.'});
     });
 
 router.post('/login', async (req: Request, res: Response) => {
+  let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log(new Date().toLocaleString() + `: ${ip} POST /users/auth/login - Post login information`);
+
   const email = req.body.email;
   const password = req.body.password;
 
@@ -81,6 +86,9 @@ router.post('/login', async (req: Request, res: Response) => {
 
 
 router.post('/', async (req: Request, res: Response) => {
+  let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log(new Date().toLocaleString() + `: ${ip} POST /users/auth - Create new user`);
+
   const email = req.body.email;
   const plainTextPassword = req.body.password;
 
